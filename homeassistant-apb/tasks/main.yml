@@ -19,6 +19,8 @@
   loop:
     - name: service.yaml.j2
     - name: pvc.yaml.j2
+    - name: route.yaml.j2
+      apply: "{{ True if 'route.openshift.io' in lookup('k8s', cluster_info='api_groups') else False }}"
     - name: deployment.yaml.j2
 
 - name: "Update last operation"

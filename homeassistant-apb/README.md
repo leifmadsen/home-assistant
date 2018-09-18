@@ -1,38 +1,36 @@
-APB Name
+homeassistant-apb
 =========
 
-A brief description of the APB goes here.
+Deploy [Home Assistant](https://www.home-assistant.io/) with either ephemeral
+or persistent storage, along with a container for editing configuration files.
 
-Requirements
-------------
+Intended to be consumed as an [Ansible Playbook
+Bundle](http://automationbroker.io).
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
-APB Variables
+homeassistant-apb variables
 --------------
 
-A description of the settable variables for this APB should go here, including any variables that are in defaults/main.yml, vars/main.yml, apb.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (i.e. hostvars, group vars, etc.) should be mentioned here as well.
+    app_name: "homeassistant-apb-{{ _apb_service_instance_id.split('-')[0] }}"
 
-Dependencies
-------------
+Default application name when provisioning objects. Make sure this name does
+not exceed 63 chars (less 18 characters if using GlusterFS due to persistent
+volume dynamic name creation).
 
-A list of other APBs/roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+    app_image: docker.io/homeassistant/home-assistant:0.78.0
 
-Example Playbook
-----------------
+Container image and version to deploy.
 
-Including an example of how to use your APB (for instance, with variables passed in as parameters) is always nice for users too:
+    namespace: "{{ lookup('env','NAMESPACE') | default('home-assistant', true) }}"
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+Namespace the application will be deployed to.
+
 
 License
 -------
 
-BSD
+Apache v2.0
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Leif Madsen (leif at leifmadsen dot com)

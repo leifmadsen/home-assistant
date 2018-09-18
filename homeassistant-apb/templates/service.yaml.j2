@@ -14,8 +14,8 @@ metadata:
   namespace: {{ namespace | string }}
 spec:
   ports:
-  - name: "80"
-    port: 80
+  - name: web
+    port: 8123
     protocol: TCP
     targetPort: 8123
   selector:
